@@ -1,0 +1,31 @@
+
+
+services:
+  app:
+    image: georffrey/todo-api-nodejs:1.0.0
+    container_name: todo-app
+    depends_on:
+      - db
+    environment:
+      DATABASE_CONN_URL: ${CONN_DB_URL}
+      DATBASE_NAME: ${DB_NAME_APP}
+      PORT: ${PORT}
+      JWT_SECRET: ${PRIVATE_KEY_JWT}
+    ports:
+      - ${PORT}:${PORT}
+
+  db:
+    image: mongo:7.0.5-rc0
+    container_name: ${DB_HOST}
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${USER_DB}
+      MONGO_INITDB_ROOT_PASSWORD: ${USER_PASSWORD}
+    volumes:
+      - mongo-db:/data/db
+
+volumes:
+  mongo-db:
+    external: false

@@ -1,0 +1,11 @@
+
+
+
+node_modules/
+.dockerignore
+Dockerfile
+.env
+.env.template
+.gitignore
+
+.vscode
